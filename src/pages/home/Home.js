@@ -1,7 +1,9 @@
+import PostList from '../../components/home/';
+
 function Home() {
   return (
     <div className="container text-center">
-      <h1>home page</h1>
+      <PostList />
     </div>
   );
 }
