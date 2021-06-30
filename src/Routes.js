@@ -6,6 +6,7 @@ const LoginPage = React.lazy(() => import('./pages/login'));
 const RegisterPage = React.lazy(() => import('./pages/register'));
 const UserPage = React.lazy(() => import('./pages/profile-page'));
 const Home = React.lazy(() => import('./pages/home'));
+const CommentPage = React.lazy(() => import('./pages/comments'));
 
 function Routes() {
   return (
@@ -21,6 +22,10 @@ function Routes() {
 
         <Route path={route.USER_PROFILE}>
           <UserPage />
+        </Route>
+
+        <Route path={`${route.COMMENT_PAGE}/:post_id`}>
+          <CommentPage />
         </Route>
 
         <Route path={route.HOME_PATH}>

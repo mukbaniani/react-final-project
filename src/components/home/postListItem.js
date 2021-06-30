@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux';
 import { authSelector } from '../../redux/selectors';
 import { useContext } from 'react';
 import { PostProvider } from '../../providers/PostProvider';
+import { NavLink } from 'react-router-dom';
+import { COMMENT_PAGE } from '../../utils/routes';
 
 function PostListItem({ posts }) {
   const authed = useSelector(authSelector);
@@ -23,7 +25,9 @@ function PostListItem({ posts }) {
           </button>
         </div>
       ) : null}
-      <button className="btn btn-primary">მეტი ინფორმაცია</button>
+      <NavLink className="btn btn-primary" to={`${COMMENT_PAGE}/${posts.id}`}>
+        პოსტის კომენტარები
+      </NavLink>
     </div>
   );
 }
