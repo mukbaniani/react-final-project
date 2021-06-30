@@ -45,7 +45,7 @@ function Navigation() {
           <li className="nav-item">
             <NavLink
               className="nav-link"
-              to={routes.LOGIN_PATH}
+              to={routes.USER_PROFILE}
               tabIndex="-1"
               aria-disabled="true">
               პროფილი

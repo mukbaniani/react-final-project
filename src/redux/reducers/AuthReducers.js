@@ -2,9 +2,6 @@ import * as types from '../action-types';
 
 const initialState = {
   auth: null,
-  error: null,
-  loading: false,
-  companies: null,
 };
 
 export const AuthReduser = (state = initialState, action) => {

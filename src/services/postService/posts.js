@@ -4,7 +4,7 @@ export const postService = async () => {
       `${process.env.REACT_APP_API_URL}?_start=1&_limit=10`,
     );
     const result = await response.json();
-    return result;
+    return result.map((v) => ({ ...v, like: 0 }));
   } catch (error) {
     console.log(error);
   }
