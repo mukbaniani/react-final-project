@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setAuthUserAction } from '../../../redux/actions/AuthAction';
 import { AUTH_TOKEN } from '../../../utils/constants';
 import { HOME_PATH } from '../../../utils/routes';
+import { WithAuthProtecred } from '../../../hoc/WithAuthProtected';
 
 function Login() {
   const { register, handleSubmit } = useForm();
@@ -66,4 +67,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default WithAuthProtecred(Login);

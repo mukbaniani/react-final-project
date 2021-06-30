@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { PostProvider } from '../../providers/PostProvider';
 import UserPostItem from './UserPostItem';
+import { IsAuthenicated } from '../../hoc/IsAuthenicated';
 
 function PostList() {
   const { userPost } = useContext(PostProvider);
@@ -15,4 +16,4 @@ function PostList() {
   );
 }
 
-export default PostList;
+export default IsAuthenicated(PostList);
