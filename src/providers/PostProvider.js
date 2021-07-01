@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { postService } from '../services/postService/posts';
-import { getUserPosts } from '../services/postService/userPosts';
+import { getComments } from '../services/postService/commentList';
 
 export const PostProvider = React.createContext(null);
 
 function PostProviderComponent({ children }) {
   const [post, setPost] = useState([]);
-  const [userPost, setUserPost] = useState([]);
+  const [commentList, setCommentList] = useState([]);
 
   const loadPosts = async () => {
     const result = await postService();
     setPost(result);
   };
 
-  const loadUserPosts = async () => {
-    const result = await getUserPosts();
-    setUserPost(result);
+  const loadcommentsPosts = async () => {
+    const result = await getComments();
+    setCommentList(result);
   };
 
   const addPost = (newPost) => {
     setPost([...post, newPost]);
+  };
+
+  const addComment = (newComment) => {
+    setCommentList([...commentList, newComment]);
   };
 
   const onLike = (posts) => {
@@ -40,11 +44,12 @@ function PostProviderComponent({ children }) {
   }, []);
 
   useEffect(() => {
-    loadUserPosts();
+    loadcommentsPosts();
   }, []);
 
   return (
-    <PostProvider.Provider value={{ post, onLike, addPost, userPost }}>
+    <PostProvider.Provider
+      value={{ post, onLike, addPost, commentList, addComment }}>
       {children}
     </PostProvider.Provider>
   );

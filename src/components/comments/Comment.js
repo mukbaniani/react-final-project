@@ -1,29 +1,11 @@
-import useFetch from '../../hook';
+import { useContext } from 'react';
+import { PostProvider } from '../../providers/PostProvider';
 import { useState } from 'react';
 
 function Comments({ post_id }) {
   const id = parseInt(post_id);
   const [comment, setComment] = useState('');
-
-  const {
-    loading,
-    data: response,
-    error,
-  } = useFetch(`${process.env.REACT_APP_COMMENT_URL}?_start=1&_limit=10`);
-  if (loading) {
-    return (
-      <div className="row">
-        <h2>loading</h2>
-      </div>
-    );
-  }
-  if (error) {
-    return (
-      <div className="alert alert-danger">
-        <pre>{JSON.stringify(error)}</pre>
-      </div>
-    );
-  }
+  const { commentList, addComment } = useContext(PostProvider);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -34,12 +16,13 @@ function Comments({ post_id }) {
       email: 'Eliseo@gardner.biz',
       body: comment,
     };
-    response.push(newComment);
+    addComment(newComment);
+    setComment('');
   };
 
   return (
     <div className="container">
-      {response
+      {commentList
         .filter((el) => el.postId === id)
         .map((comments) => {
           return (
