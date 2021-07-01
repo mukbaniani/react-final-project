@@ -1,8 +1,11 @@
 import { useContext } from 'react';
 import { PostProvider } from '../../providers/PostProvider';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../redux/selectors';
 
 function Comments({ post_id }) {
+  const authed = useSelector(authSelector);
   const id = parseInt(post_id);
   const [comment, setComment] = useState('');
   const { commentList, addComment } = useContext(PostProvider);
@@ -32,18 +35,20 @@ function Comments({ post_id }) {
             </div>
           );
         })}
-      <form onSubmit={onSubmit}>
-        <textarea
-          className="form-control mt-2"
-          placeholder="comment"
-          value={comment}
-          onChange={(event) => {
-            setComment(event.target.value);
-          }}></textarea>
-        <button className="btn btn-primary text-center mt-2">
-          add comment
-        </button>
-      </form>
+      {authed ? (
+        <form onSubmit={onSubmit}>
+          <textarea
+            className="form-control mt-2"
+            placeholder="comment"
+            value={comment}
+            onChange={(event) => {
+              setComment(event.target.value);
+            }}></textarea>
+          <button className="btn btn-primary text-center mt-2">
+            add comment
+          </button>
+        </form>
+      ) : null}
     </div>
   );
 }
